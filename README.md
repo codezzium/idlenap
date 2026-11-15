@@ -217,3 +217,7 @@ The tests build fake `/proc` and `/sys/fs/cgroup` trees, so they run anywhere.
 - [Senpai](https://facebookmicrosites.github.io/resctl-demo-website/docs/demo_docs/memory_sizing_senpai/senpai) and Meta's [Transparent Memory Offloading](https://engineering.fb.com/2022/06/20/data-infrastructure/transparent-memory-offloading-more-memory-at-a-fraction-of-the-cost-and-power/) tune memory continuously for every cgroup using pressure feedback. idlenap is narrower: it targets idle containers by name or label and keeps them out of the request path.
 - [DAMON_RECLAIM](https://docs.kernel.org/admin-guide/mm/damon/reclaim.html) pages out cold memory system-wide from inside the kernel.
 - [Sablier](https://github.com/sablierapp/sablier) stops containers when idle and starts them on demand through a reverse proxy plugin.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
