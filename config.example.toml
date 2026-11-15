@@ -1,0 +1,30 @@
+interval = "30s"
+apply = false
+docker_socket = "/var/run/docker.sock"
+state_file = "/var/lib/idlenap/state.json"
+events_file = "/var/lib/idlenap/events.jsonl"
+activity_bytes = 8192
+topup_mb = 64
+min_swap_free_mb = 512
+max_pressure = 10.0
+reclaim_timeout = 5.0
+restore_swap = false
+exclude = ["*-db", "*-db-*", "*postgres*", "*redis*", "*nginx*", "*pgbouncer*"]
+
+[[target]]
+match = "*-web"
+mode = "web"
+idle = "10m"
+
+[[target]]
+match = "*-web-[0-9]*"
+mode = "web"
+idle = "10m"
+
+[[target]]
+match = "*worker*"
+mode = "background"
+
+[[target]]
+match = "*beat*"
+mode = "background"
