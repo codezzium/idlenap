@@ -1,0 +1,34 @@
+name: idlenap
+
+services:
+  idlenap:
+    build: .
+    image: idlenap:0.2.0
+    container_name: idlenap
+    restart: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys/fs/cgroup:/host/cgroup
+      - /run/kiri/docker.sock:/var/run/docker.sock
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/idlenap:/etc/idlenap:ro
+      - idlenap-state:/var/lib/idlenap
+
+  panel:
+    image: idlenap:0.2.0
+    container_name: idlenap-panel
+    restart: unless-stopped
+    user: "65534:65534"
+    command: ["panel", "--listen", "0.0.0.0:9180"]
+    ports:
+      - "127.0.0.1:18190:9180"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys/fs/cgroup:/host/cgroup:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/idlenap:/etc/idlenap:ro
+      - idlenap-state:/var/lib/idlenap:ro
+
+volumes:
+  idlenap-state:
+    external: true
